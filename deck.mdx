@@ -1,0 +1,174 @@
+import { future } from '@mdx-deck/themes';
+export const theme = future;
+import { Invert, Split, Image, Notes } from 'mdx-deck';
+import { LiveCode } from 'mdx-deck-live-code';
+
+import BasicStylingExample from './emotion-examples/basic-styling';
+import CascadeExample from './emotion-examples/cascade';
+import ChangeTagExample from './emotion-examples/changing-tags.jsx';
+import VueComponentImage from './vue-component.png';
+import EmotionComponentImage from './emotion-everything-in-same-file.png';
+
+# CSS in JS
+
+## Demonstrated with Emotion 👩‍🎤
+
+---
+
+agenda 🗓️
+
+- Why CSS in JS?
+- Examples with Emotion
+
+---
+
+<Invert>No, really? Y tho?</Invert>
+
+---
+
+> Although there are different ways to get there, an in depth understanding of CSS will help you make the right decisions.
+> -- <cite>Unkown</cite>
+
+In my opinion, CSS in JS is an alternative to pre-processors. We are still leveraging out exsisting knowledge of CSS;
+however we now have different ways of managing/maintaining the code produces our css, in addition to new capabilities that
+are not possible with SASS
+
+---
+
+drawbacks of css-in-js 😬
+
+- More tools to learn and manage
+  - Not the old way.
+    - Retort: SASS was new once upon a time.
+  - Some designers also write css, which now introduces a knowledge of javascript.
+    - Retort: The jump in syntax is not that huge if a developer is used to writing SASS.
+      The larger issue here would be project structure, which is something a team should already
+      be collaborating on.
+
+---
+
+drawbacks of css-in-js
+
+- Have to ship the run time.
+  - Takes a performance hit.
+  - Unless your using a library that supports but that has other issues.
+  - Retort: The existing libraries are already being used in production by large companies. This
+    performance impact is most likely minimal and must be measured against the benefit of getting
+    better static analysis.
+- Committing to a library
+  - Material-UI uses JSS 💩(lol j/k; it's just not for me.)
+- Loose the cascade
+  - Retort: This is also a pro of using CSS-in-JS.
+
+---
+
+benefits 🤘
+
+> What can we do with CSS-in-JS that we can’t do with SASS/CSS Modules?
+
+- Capable of static analysis.
+- Run time style generation/manipulation.
+- Javascript >= Sass.
+- Everything in the same file.
+
+---
+
+capable of static analysis 🔎
+
+- Type enforcement
+  - We can assert on the validity of CSS properties without additional tooling.
+- Critical CSS
+  - Only styles required to render the component are loaded for any page without additional configuration.
+- Server Rendering
+  - Frameworks like Next.js can render only the required styles on the server.
+- Dead code elimination
+  - Styles that are un-used can be identified and removed from the bundle.
+
+---
+
+run time style generation/manipulation 🏃
+
+- Previously we could only manipulate styles at build time.
+  - Example: Imagine generating a grid.
+- We no longer use classnames, just style objects or components.
+  - No more name collisons
+  - No more cascade
+  - Global library style support is 👌in emotion.
+
+---
+
+javascript >= sass 🛠️
+
+- JS can do everything SASS can do.
+- No need to learn extra concepts in SASS (functions, constants, spread operators, and even utility functions)
+  - This gives us more elaborate ways to compose styles and generate utilities for re-using styles
+
+---
+
+a lesson from vue.js 🔭
+
+<Split>
+
+- I remember thinking React was dumb because it mixed HTML/JS 🤓
+- Including styles in the same file was originally pioneered by Vue.js (I think lol)
+- Code is more readable as we do not have to navigate multiple files to tell what is going on
+
+<img src={VueComponentImage} width="65%" alt="Example of vue code" />
+
+</Split>
+
+<Notes>- Working with Backbone.js required three files to be open.</Notes>
+
+---
+
+everything in same file 📝
+
+<Split>
+
+- From looking at the component we can see styles and not class properties.
+- We know these styles are only d to this file.
+- We can see how props affect properties intsead of manipulating class names.
+
+<img src={EmotionComponentImage} alt="Example of emotion code" />
+
+</Split>
+
+---
+
+<Invert> Examples with Emotion </Invert>
+
+---
+
+basic styling
+
+<BasicStylingExample />
+
+---
+
+cascade
+
+<CascadeExample />
+
+---
+
+changing tags
+
+<ChangeTagExample />
+
+---
+
+popular alternatives to emotion
+
+- Linaria
+- Styled Components
+
+---
+
+# Questions 🙋
+
+<Notes>
+  - Differences from inline styling - Have to implement work arounds for things
+  like pseudo selectors and media queries - Loss of global styles - Styles are
+  in dom, which make dev tools super hard to readable - Rendering performance
+  takes a hit because each node's style tag has to be evaluated
+</Notes>

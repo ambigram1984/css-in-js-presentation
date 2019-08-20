@@ -1,0 +1,23 @@
+{
+  "name": "ccs-in",
+  "version": "1.0.0",
+  "description": "CSS In JS presentation",
+  "main": "index.js",
+  "scripts": {
+    "start": "mdx-deck deck.mdx",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@emotion/styled": "^10.0.15",
+    "mdx-deck": "^3.0.9",
+    "mdx-deck-live-code": "^1.0.1",
+    "raw-loader": "^3.1.0",
+    "react-live": "^2.1.2",
+    "styled-components": "^4.3.2",
+    "@mdx-deck/themes": "^3.0.8",
+    "emotion": "^10.0.14"
+  },
+  "devDependencies": {}
+}
