@@ -1,11 +1,26 @@
 import { future } from '@mdx-deck/themes';
-export const theme = future;
+export const theme = [
+  future,
+  {
+    styles: {
+      Slide: {
+        padding: '20px'
+      },
+      div: {
+        padding: '20px'
+      }
+    }
+  }
+];
 import { Invert, Split, Image, Notes } from 'mdx-deck';
 import { LiveCode } from 'mdx-deck-live-code';
 
 import BasicStylingExample from './emotion-examples/basic-styling';
 import CascadeExample from './emotion-examples/cascade';
 import ChangeTagExample from './emotion-examples/changing-tags.jsx';
+import ReuseStyleExample from './emotion-examples/reuse-styles.jsx';
+import GlobalStyles from './emotion-examples/global-styles.jsx';
+
 import VueComponentImage from './vue-component.png';
 import EmotionComponentImage from './emotion-everything-in-same-file.png';
 
@@ -39,26 +54,24 @@ drawbacks of css-in-js 😬
 
 - More tools to learn and manage
   - Not the old way.
-    - Retort: SASS was new once upon a time.
+    - SASS was new once upon a time.
   - Some designers also write css, which now introduces a knowledge of javascript.
-    - Retort: The jump in syntax is not that huge if a developer is used to writing SASS.
+    - the jump in syntax is not that huge if a developer is used to writing SASS.
       The larger issue here would be project structure, which is something a team should already
       be collaborating on.
 
 ---
 
-drawbacks of css-in-js
+drawbacks of css-in-js 😬
 
 - Have to ship the run time.
   - Takes a performance hit.
-  - Unless your using a library that supports but that has other issues.
-  - Retort: The existing libraries are already being used in production by large companies. This
-    performance impact is most likely minimal and must be measured against the benefit of getting
-    better static analysis.
+    - theres also a performance gain in only loading required styles
+    - unless your using a library that supports but that has other issues.
 - Committing to a library
-  - Material-UI uses JSS 💩(lol j/k; it's just not for me.)
+  - material-UI uses JSS 💩(lol j/k; it's just not for me.)
 - Loose the cascade
-  - Retort: This is also a pro of using CSS-in-JS.
+  - this is also a pro of using CSS-in-JS.
 
 ---
 
@@ -76,13 +89,10 @@ benefits 🤘
 capable of static analysis 🔎
 
 - Type enforcement
-  - We can assert on the validity of CSS properties without additional tooling.
-- Critical CSS
-  - Only styles required to render the component are loaded for any page without additional configuration.
-- Server Rendering
-  - Frameworks like Next.js can render only the required styles on the server.
+  - we can assert on the validity of CSS.
+- derver Rendering
+  - no additonal to config to use critical styles when using Next.js.
 - Dead code elimination
-  - Styles that are un-used can be identified and removed from the bundle.
 
 ---
 
@@ -91,17 +101,18 @@ run time style generation/manipulation 🏃
 - Previously we could only manipulate styles at build time.
   - Example: Imagine generating a grid.
 - We no longer use classnames, just style objects or components.
-  - No more name collisons
-  - No more cascade
-  - Global library style support is 👌in emotion.
+  - no more name collisons
+  - no more cascade
+  - global library style support is easy in emotion.
 
 ---
 
 javascript >= sass 🛠️
 
 - JS can do everything SASS can do.
-- No need to learn extra concepts in SASS (functions, constants, spread operators, and even utility functions)
-  - This gives us more elaborate ways to compose styles and generate utilities for re-using styles
+  - functions, spread, variables, etc..
+- Things like Stylis.js can be used for pre-processing
+  - vendor prefixes, converting colors to hex
 
 ---
 
@@ -139,36 +150,55 @@ everything in same file 📝
 
 ---
 
-basic styling
-
 <BasicStylingExample />
 
 ---
 
-cascade
+<ReuseStyleExample />
+
+---
 
 <CascadeExample />
 
 ---
 
-changing tags
-
 <ChangeTagExample />
+
+---
+
+<GlobalStyles />
+
+---
+
+how does this work?
+
+When calling things such as `h1.styled` emotion takes the styles past to that funtion, hashes them to create
+a class name, and then inserts them into the `head` of the document in a `style` tag.
 
 ---
 
 popular alternatives to emotion
 
 - Linaria
-- Styled Components
+  - Generates a static css file so there's no need to ship a run time
+  - Looses some of the dynamic features
 
 ---
 
 # Questions 🙋
 
 <Notes>
-  - Differences from inline styling - Have to implement work arounds for things
-  like pseudo selectors and media queries - Loss of global styles - Styles are
-  in dom, which make dev tools super hard to readable - Rendering performance
-  takes a hit because each node's style tag has to be evaluated
+  <h1> Differences from inline styling </h1>
+  <ul>
+    <li>
+      Have to implement work arounds for things like pseudo selectors and media
+      queries
+    </li>
+    <li>Loss of global styles</li>
+    <li>Styles are in dom, which make dev tools super hard to readable</li>
+    <li>
+      Rendering performance takes a hit because each node's style tag has to be
+      evaluated
+    </li>
+  </ul>
 </Notes>

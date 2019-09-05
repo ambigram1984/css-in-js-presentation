@@ -2,6 +2,8 @@ import React from 'react';
 import LiveCodeExample from './live-code-example';
 
 const code = `
+  /** Basic Styling **/
+  
   const Button = styled.button\`
     color: hotpink;
     background-color: black;

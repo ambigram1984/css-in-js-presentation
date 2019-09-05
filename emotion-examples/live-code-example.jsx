@@ -1,9 +1,10 @@
 import React from 'react';
 import { LiveProvider, LiveEditor, LivePreview, LiveError } from 'react-live';
 import styled from '@emotion/styled';
+import { Global, css } from '@emotion/core';
 import { Split } from 'mdx-deck';
 
-const scope = { styled };
+const scope = { styled, css, Global };
 
 const CodeContainer = styled.div`
   font-size: 20px;

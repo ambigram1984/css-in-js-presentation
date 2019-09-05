@@ -2,6 +2,8 @@ import React from 'react';
 import LiveCodeExample from './live-code-example';
 
 const code = `
+/** Cascade Example **/
+
 const Example = styled('span')\`
     color: lightgreen;
     display: block;
