@@ -4,6 +4,7 @@
   "description": "CSS In JS presentation",
   "main": "index.js",
   "scripts": {
+    "build": "mdx-deck build deck.mdx",
     "start": "mdx-deck deck.mdx",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
